@@ -1,0 +1,45 @@
+version: '3'
+services:
+  #Apache
+  # apache_server:
+  #   container_name: alpha_apache
+  #   build: ./apache_server
+  #   volumes:
+  #     - ../alpha:/var/www/project
+  #   ports:
+  #     - "8001:80"
+  #   tty: true
+  #Nginx
+  project_nginx:
+    container_name: project_nginx
+    build: ./nginx_server
+    volumes:
+      - ../project:/var/www/project
+    ports:
+      - "8000:80"
+    tty: true
+  #MYSQL
+  project_mysql:
+    container_name: project_mysql
+    build: ./mysql
+    tty: true
+    ports:
+      - "43306:3306"
+    environment:
+      MYSQL_DATABASE: app
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root@secret123
+  #REDIS
+  project_redis:
+    container_name: project_redis
+    build: ./redis
+    ports:
+        - "6379:6379"
+  #RabbitMQ
+  project_rabbit:
+    container_name: project_rabbit
+    build: ./rabbitmq
+    ports:
+        - "5672:5672"
+        - "15672:15672"
+
