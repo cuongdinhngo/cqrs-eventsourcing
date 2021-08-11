@@ -21,19 +21,6 @@ class UserCommon
     }
 
     /**
-     * Check plain and hashed password
-     *
-     * @param string $plainPassword
-     * @param string $hashedPassword
-     *
-     * @return boolean
-     */
-    public function checkPassword(string $plainPassword, string $hashedPassword)
-    {
-        return Hash::check($plainPassword, $hashedPassword);
-    }
-
-    /**
      * Prepare data for updating
      *
      * @param array $request
