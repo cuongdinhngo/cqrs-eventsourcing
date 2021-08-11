@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\User\CommandHandlers;
+namespace App\CommandHandlers\User;
 
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class UserCommon
 {
@@ -17,7 +16,7 @@ class UserCommon
     public function prepareData(array $request)
     {
         $request['password'] = Hash::make($request['password']) ?? null;
-        $request['api_token'] = Str::random(80);
+        $request['api_token'] = generateApiToken();
         return $request;
     }
 

@@ -4,11 +4,12 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Repositories\User\UserRepositoryInterface;
-use App\Http\Controllers\User\CommandHandlers\UserRegisterCommand;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\UserUpdatedRequest;
-use App\Http\Controllers\User\CommandHandlers\UserUpdateCommand;
+use App\CommandHandlers\CommandFactory;
+use App\CommandHandlers\User\UserRegisterCommand;
+use App\CommandHandlers\User\UserUpdateCommand;
+use App\Repositories\User\UserRepositoryInterface;
 
 class UserController extends Controller
 {
@@ -29,7 +30,7 @@ class UserController extends Controller
     public function store(UserRegisterRequest $request)
     {
         try {
-            $result = app(UserRegisterCommand::class)->handle($this->userRepository, $request->all());
+            $result = app(CommandFactory::class)->handle(UserRegisterCommand::class, $request->all());
             if ($result) {
                 return $this->responseSuccess(['message' => 'Created Successfully']);
             }
@@ -85,7 +86,7 @@ class UserController extends Controller
         try {
             $data = $request->all();
             $data['id'] = $request->id;
-            $result = app(UserUpdateCommand::class)->handle($this->userRepository, $data);
+            $result = app(CommandFactory::class)->handle(UserUpdateCommand::class, $data);
             if ($result) {
                 return $this->responseSuccess(['message' => 'Updated Successfully']);
             }

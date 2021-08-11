@@ -1,31 +1,34 @@
 <?php
 
-namespace App\Http\Controllers\User\CommandHandlers;
+namespace App\CommandHandlers\User;
 
-use App\Repositories\User\UserRepository;
+use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Auth\Events\Registered;
+use App\CommandHandlers\CommandInterface;
 
-class UserUpdateCommand
+class UserUpdateCommand implements CommandInterface
 {
     public $userCommon;
 
-    public function __construct(UserCommon $userCommon)
+    public $userRepository;
+
+    public function __construct(UserRepositoryInterface $userRepository, UserCommon $userCommon)
     {
         $this->userCommon = $userCommon;
+        $this->userRepository = $userRepository;
     }
 
     /**
      * Handle updating user
      *
-     * @param UserRepository $userRepository
      * @param array $request
      *
      * @return boolean
      */
-    public function handle(UserRepository $userRepository, array $request)
+    public function execute(array $request)
     {
         $data = $this->userCommon->prepareUpdateData($request);
-        if ($user = $userRepository->update($request['id'], $data)) {
+        if ($user = $this->userRepository->update($request['id'], $data)) {
             if (isset($request['email'])) {
                 event(new Registered($user));
             }
