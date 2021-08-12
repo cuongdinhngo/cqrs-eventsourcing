@@ -19,7 +19,6 @@ class LoginContext extends TestCase implements Context
      */
     public function __construct()
     {
-        $this->truncateTable('users');
         $this->setUp();
     }
 

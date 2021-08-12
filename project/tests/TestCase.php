@@ -47,9 +47,6 @@ abstract class TestCase extends BaseTestCase
     public function prepareDatabaseTest()
     {
         Artisan::call("migrate");
-        if (!$this->user) {
-            $this->user = $this->createDummyUser();
-        }
     }
 
     /**
