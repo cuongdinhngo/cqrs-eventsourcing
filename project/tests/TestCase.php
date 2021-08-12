@@ -49,7 +49,7 @@ abstract class TestCase extends BaseTestCase
      */
     public function createDummyUser()
     {
-        return factory(User::class)->make(
+        return factory(User::class)->create(
             [
                 "name" => "Mr Dummy Test",
                 "email" => "dummy_test@mailinator.com",

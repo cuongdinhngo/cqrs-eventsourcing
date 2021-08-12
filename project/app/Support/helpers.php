@@ -11,7 +11,7 @@ if (!function_exists('generateApiToken')) {
 	 */
 	function generateApiToken(int $length = null)
 	{
-        return Str::random($length ?? config('api_token_length'));
+        return Str::random($length ?? config('constants.api_token_length'));
 	}
 }
 
