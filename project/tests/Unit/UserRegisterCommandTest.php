@@ -38,6 +38,17 @@ class UserRegisterCommandTest extends TestCase
     }
 
     /**
+     * TearDown the test environment.
+     *
+     * @return void
+     */
+    public function tearDown(): void
+    {
+        $this->truncateManyTables();
+        parent::tearDown();
+    }
+
+    /**
      * test Injected User Repository
      *
      * @return void

@@ -4,9 +4,28 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use App\CommandHandlers\User\UserCommon;
+use App\Models\User;
 
 class UserCommonTest extends TestCase
 {
+    public function setUp():void
+    {
+        parent::setUp();
+        $this->table = (new User())->getTable();
+        $this->truncateTable($this->table);
+    }
+
+    /**
+     * TearDown the test environment.
+     *
+     * @return void
+     */
+    public function tearDown(): void
+    {
+        $this->truncateManyTables();
+        parent::tearDown();
+    }
+
     /**
      * Test prepare date for register
      *

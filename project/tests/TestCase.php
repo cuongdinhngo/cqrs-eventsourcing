@@ -30,6 +30,16 @@ abstract class TestCase extends BaseTestCase
     }
 
     /**
+     * TearDown the test environment.
+     *
+     * @return void
+     */
+    public function tearDown(): void
+    {
+        parent::tearDown();
+    }
+
+    /**
      * Prepare database test
      *
      * @return void

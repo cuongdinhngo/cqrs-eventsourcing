@@ -18,6 +18,17 @@ class UserRegisterTest extends TestCase
         $this->truncateTable($this->table);
     }
 
+    /**
+     * TearDown the test environment.
+     *
+     * @return void
+     */
+    public function tearDown(): void
+    {
+        $this->truncateManyTables();
+        parent::tearDown();
+    }
+
     public function jsonRequestUserRegister(array $data)
     {
         return $this->json('POST', 'api/users', $data);

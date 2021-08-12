@@ -26,6 +26,17 @@ class CommandFactoryTest extends TestCase
     }
 
     /**
+     * TearDown the test environment.
+     *
+     * @return void
+     */
+    public function tearDown(): void
+    {
+        $this->truncateManyTables();
+        parent::tearDown();
+    }
+
+    /**
      * Test Command Handle
      *
      * @return void
