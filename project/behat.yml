@@ -9,7 +9,6 @@ default:
     suites:
         default:
             contexts:
-                - BeHatContext
                 - WelcomeContext
         phase1:
             contexts:
