@@ -32,6 +32,7 @@ RUN apt-get update && apt-get install -y --allow-remove-essential \
         php-pgsql \
         php-zip \
         php-imagick \
+        php-xdebug \
         git \
         curl \
         vim \

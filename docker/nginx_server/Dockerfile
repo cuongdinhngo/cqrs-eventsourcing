@@ -32,11 +32,13 @@ RUN apt-get update && apt-get install -y --allow-remove-essential \
         php-pgsql \
         php-zip \
         php-imagick \
+        php-xdebug \
         git \
         curl \
         vim \
         nano \
-        php7.4-gd \
+        php-gd \
+        php-redis \
         npm \
         telnetd \
         wget \
@@ -66,4 +68,4 @@ RUN usermod -u 1000 www-data
 
 CMD service php7.4-fpm start && nginx
 
-EXPOSE 80
+EXPOSE 80 9000
