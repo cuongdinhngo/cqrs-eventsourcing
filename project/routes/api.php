@@ -26,5 +26,6 @@ Route::group(['namespace' => 'User', 'prefix' => 'users'], function(){
         Route::get('/search', 'UserController@search');
         Route::get('/{id}', 'UserController@show');
         Route::put('/{id}', 'UserController@update');
+        Route::post('/batch-users', 'UserController@createUsers');
     });
 });

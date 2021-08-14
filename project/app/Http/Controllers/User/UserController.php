@@ -9,7 +9,10 @@ use App\Http\Requests\UserUpdatedRequest;
 use App\CommandHandlers\CommandFactory;
 use App\CommandHandlers\User\UserRegisterCommand;
 use App\CommandHandlers\User\UserUpdateCommand;
+use App\Jobs\CreateBatchUsersJob;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Jobs\ProcessUserJobs;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -94,5 +97,12 @@ class UserController extends Controller
             report($e);
         }
         return $this->responseError("Can not update user", 500);
+    }
+
+    public function createUsers(Request $request)
+    {
+        logger(__METHOD__);
+        CreateBatchUsersJob::dispatch($request['batch']);
+        logger('===> FINISHED CREATE USERS');
     }
 }

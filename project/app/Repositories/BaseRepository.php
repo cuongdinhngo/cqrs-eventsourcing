@@ -93,4 +93,15 @@ abstract class BaseRepository implements BaseInterface
 
         return false;
     }
+
+    /**
+     * Insert
+     *
+     * @param array $attributes
+     * @return void
+     */
+    public function insert($attributes = [])
+    {
+        return $this->model->insert($attributes);
+    }
 }
