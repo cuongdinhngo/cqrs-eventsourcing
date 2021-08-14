@@ -13,6 +13,8 @@ services:
   project_nginx:
     container_name: project_nginx
     build: ./nginx_server
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - ../project:/var/www/project
     ports:
@@ -48,4 +50,7 @@ services:
     container_name: rabbit_admin
     ports:
       - "8080:15672"
+networks:
+  default:
+    name: cqrs-eventsourcing-network
 
