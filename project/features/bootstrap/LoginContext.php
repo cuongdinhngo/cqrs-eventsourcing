@@ -5,13 +5,15 @@ use Tests\TestCase;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use PHPUnit_Framework_Assert as PHPUnit;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 /**
  * Defines application features from the specific context.
  */
 class LoginContext extends TestCase implements Context
 {
+    // use WithoutMiddleware;
+
     protected $content;
 
     /**
@@ -28,7 +30,7 @@ class LoginContext extends TestCase implements Context
      */
     public function iComeToThePath($path)
     {
-        $response = $this->get('/');
+        $response = $this->get($path);
         $this->assertEquals(200, $response->getStatusCode());
         $this->content = $response->getContent();
     }

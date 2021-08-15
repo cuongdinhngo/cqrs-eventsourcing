@@ -2,12 +2,15 @@
 
 use Behat\Behat\Context\Context;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 /**
  * Defines application features from the specific context.
  */
 class WelcomeContext extends TestCase implements Context
 {
+    // use WithoutMiddleware;
+
     /**
      * Initializes context.
      */

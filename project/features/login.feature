@@ -8,8 +8,8 @@ Feature: Login
 
     Scenario: Log in as Alan
         Given I am logged in as "Alan"
-        And I come to the path "/"
-        Then I see the text "Laravel"
+        And I come to the path "/home"
+        Then I see the text "You are logged in"
 
     Scenario: Log in as Bob
         Given I am logged in as "Bob"
@@ -18,15 +18,15 @@ Feature: Login
 
     Scenario: Log in as Clare
         Given I am logged in as "Clare"
-        And I come to the path "/"
-        Then I see the text "Laravel"
+        And I come to the path "/home"
+        Then I see the text "You are logged in"
 
     Scenario: Log in as Derek
         Given I am logged in as "Derek"
-        And I come to the path "/"
-        Then I see the text "Laravel"
+        And I come to the path "/home"
+        Then I see the text "You are logged in"
 
     Scenario: Log in as Eric
         Given I am logged in as "Eric"
-        And I come to the path "/"
-        Then I see the text "Laravel"
+        And I come to the path "/home"
+        Then I see the text "You are logged in"
