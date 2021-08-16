@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 
+
 /**
  * Defines application features from the specific context.
  */
@@ -16,12 +17,13 @@ class LoginContext extends TestCase implements Context
 
     protected $content;
 
+
     /**
      * Initializes context.
      */
-    public function __construct()
+    public function __construct(string $table)
     {
-        $this->truncateTable('users');
+        $this->truncateTable($table);
         $this->setUp();
     }
 
