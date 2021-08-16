@@ -2,21 +2,18 @@
 
 use Behat\Behat\Context\Context;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
+// use PHPUnit\Framework\TestCase;
 
 /**
  * Defines application features from the specific context.
  */
 class WelcomeContext extends TestCase implements Context
 {
-    // use WithoutMiddleware;
-
     /**
      * Initializes context.
      */
     public function __construct()
     {
-        $this->truncateTable('users');
         $this->setUp();
     }
 

@@ -2,10 +2,8 @@
 
 use Behat\Behat\Context\Context;
 use Tests\TestCase;
-
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 
 /**
@@ -13,10 +11,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
  */
 class LoginContext extends TestCase implements Context
 {
-    // use WithoutMiddleware;
-
     protected $content;
-
 
     /**
      * Initializes context.

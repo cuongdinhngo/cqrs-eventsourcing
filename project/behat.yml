@@ -1,18 +1,16 @@
 default:
-    extensions:
-        Laracasts\Behat:
-            env_path: .env.behat
-        Behat\MinkExtension:
-            default_session: laravel
-            base_url: http://localhost:8000
-            laravel: ~
+    # extensions:
+        # Laracasts\Behat:
+        #     env_path: .env.behat
+        # Behat\MinkExtension:
+        #     default_session: laravel
+        #     base_url: http://localhost:8000
+        #     laravel: ~
     suites:
         default:
             contexts:
                 - WelcomeContext
         phase1:
             contexts:
-                - LoginMinkContext:
+                - LoginContext:
                     table: users
-                # - LoginContext:
-                #     table: users
