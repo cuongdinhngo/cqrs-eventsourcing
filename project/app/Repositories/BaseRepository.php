@@ -2,7 +2,9 @@
 
 namespace App\Repositories;
 
-abstract class BaseRepository implements BaseInterface
+use App\Contracts\Crud;
+
+abstract class BaseRepository implements Crud
 {
     protected $model;
 

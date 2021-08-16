@@ -6,23 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\UserUpdatedRequest;
-use App\CommandHandlers\CommandFactory;
-use App\CommandHandlers\User\UserRegisterCommand;
-use App\CommandHandlers\User\UserUpdateCommand;
+use App\CommandHandlers\Handlers\User\UserRegisterCommand;
+use App\CommandHandlers\Handlers\User\UserUpdateCommand;
 use App\Jobs\CreateBatchUsersJob;
-use App\Repositories\User\UserRepositoryInterface;
+use App\Contracts\User as UserContract;
 use App\Jobs\ProcessUserJobs;
 use App\Models\User;
+use App\Facades\CommandFactory;
+use App\Facades\UserRepository;
 
 class UserController extends Controller
 {
-    public $userRepository;
-
-    public function __construct(UserRepositoryInterface $userRepositoryInterface)
-    {
-        $this->userRepository = $userRepositoryInterface;
-    }
-
     /**
      * Store new user
      *
@@ -33,7 +27,7 @@ class UserController extends Controller
     public function store(UserRegisterRequest $request)
     {
         try {
-            $result = app(CommandFactory::class)->handle(UserRegisterCommand::class, $request->all());
+            $result = CommandFactory::handle(UserRegisterCommand::class, $request->all());
             if ($result) {
                 return $this->responseSuccess(['message' => 'Created Successfully']);
             }
@@ -54,7 +48,7 @@ class UserController extends Controller
     {
         $select = ['id','name', 'email'];
         $conditions = $request->all();
-        $user = $this->userRepository->findByConditions($conditions, $select);
+        $user = UserRepository::findByConditions($conditions, $select);
         return $this->responseSuccess(['results' => $user->all()]);
     }
 
@@ -69,7 +63,7 @@ class UserController extends Controller
     {
         try {
             $select = ['id','name', 'email'];
-            $user = $this->userRepository->find($request->id, $select);
+            $user = UserRepository::find($request->id, $select);
             return $this->responseSuccess(['user' => $user]);
         } catch (\Exception $e) {
             report($e);
@@ -89,7 +83,7 @@ class UserController extends Controller
         try {
             $data = $request->all();
             $data['id'] = $request->id;
-            $result = app(CommandFactory::class)->handle(UserUpdateCommand::class, $data);
+            $result = CommandFactory::handle(UserUpdateCommand::class, $data);
             if ($result) {
                 return $this->responseSuccess(['message' => 'Updated Successfully']);
             }

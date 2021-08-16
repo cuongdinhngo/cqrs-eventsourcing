@@ -1,8 +1,8 @@
 <?php
 
-namespace App\CommandHandlers\User;
+namespace App\CommandHandlers\Handlers\User;
 
-use Illuminate\Support\Facades\Hash;
+use Common;
 
 class UserCommon
 {
@@ -15,7 +15,7 @@ class UserCommon
      */
     public function prepareData(array $request)
     {
-        $request['password'] = Hash::make($request['password']) ?? null;
+        $request['password'] = Common::hashPassword($request['password']) ?? null;
         $request['api_token'] = generateApiToken();
         return $request;
     }
@@ -30,7 +30,7 @@ class UserCommon
     public function prepareUpdateData(array $request)
     {
         if (isset($request['password'])) {
-            $request['password'] = Hash::make($request['password']);
+            $request['password'] = Common::hashPassword($request['password']);
         }
         return $request;
     }

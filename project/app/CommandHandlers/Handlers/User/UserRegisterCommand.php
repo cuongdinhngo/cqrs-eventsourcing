@@ -1,23 +1,21 @@
 <?php
 
-namespace App\CommandHandlers\User;
+namespace App\CommandHandlers\Handlers\User;
 
 
-use App\Repositories\User\UserRepositoryInterface;
+use App\Contracts\User as UserContract;
 use Illuminate\Auth\Events\Registered;
-use App\CommandHandlers\CommandInterface;
+use App\Contracts\Command;
 use Illuminate\Database\Eloquent\Model;
+use App\Facades\UserRepository;
 
-class UserRegisterCommand implements CommandInterface
+class UserRegisterCommand implements Command
 {
     public $userCommon;
 
-    public $userRepository;
-
-    public function __construct(UserRepositoryInterface $userRepository, UserCommon $userCommon)
+    public function __construct(UserCommon $userCommon)
     {
         $this->userCommon = $userCommon;
-        $this->userRepository = $userRepository;
     }
 
     /**
@@ -45,6 +43,6 @@ class UserRegisterCommand implements CommandInterface
      */
     public function createUser(array $data)
     {
-        return $this->userRepository->create($data);
+        return UserRepository::create($data);
     }
 }

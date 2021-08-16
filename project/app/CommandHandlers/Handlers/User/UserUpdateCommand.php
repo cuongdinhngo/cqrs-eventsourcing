@@ -1,21 +1,18 @@
 <?php
 
-namespace App\CommandHandlers\User;
+namespace App\CommandHandlers\Handlers\User;
 
-use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Auth\Events\Registered;
-use App\CommandHandlers\CommandInterface;
+use App\Contracts\Command;
+use App\Facades\UserRepository;
 
-class UserUpdateCommand implements CommandInterface
+class UserUpdateCommand implements Command
 {
     public $userCommon;
 
-    public $userRepository;
-
-    public function __construct(UserRepositoryInterface $userRepository, UserCommon $userCommon)
+    public function __construct(UserCommon $userCommon)
     {
         $this->userCommon = $userCommon;
-        $this->userRepository = $userRepository;
     }
 
     /**
@@ -28,7 +25,7 @@ class UserUpdateCommand implements CommandInterface
     public function execute(array $request)
     {
         $data = $this->userCommon->prepareUpdateData($request);
-        if ($user = $this->userRepository->update($request['id'], $data)) {
+        if ($user = UserRepository::update($request['id'], $data)) {
             if (isset($request['email'])) {
                 event(new Registered($user));
             }

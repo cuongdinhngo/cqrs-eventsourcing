@@ -1,11 +1,11 @@
 <?php
-namespace App\Repositories\User;
+namespace App\Repositories;
 
-use App\Repositories\BaseRepository;
+use App\Contracts\User as UserContract;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
-class UserRepository extends BaseRepository implements UserRepositoryInterface
+class UserRepository extends BaseRepository implements UserContract
 {
     /**
      * Get Model

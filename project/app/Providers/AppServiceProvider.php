@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\User\UserRepositoryInterface;
-use App\Repositories\User\UserRepository;
+use App\Contracts\User as UserContract;
+use App\Repositories\UserRepository;
+use App\CommandHandlers\Commands\CommandFactory;
+use App\Support\Common;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,7 +17,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
+        $this->app->bind(UserContract::class, UserRepository::class);
+
+        $this->app->bind("commandFactory", function(){
+            return new CommandFactory();
+        });
+
+        $this->app->bind("common", function(){
+            return new Common();
+        });
     }
 
     /**

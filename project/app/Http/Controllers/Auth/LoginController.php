@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\LoginRequest;
-use App\Repositories\User\UserRepositoryInterface;
+use App\Facades\UserRepository;
 
 class LoginController extends Controller
 {
@@ -37,10 +37,9 @@ class LoginController extends Controller
      *
      * @return void
      */
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        $this->userRepository = $userRepository;
     }
 
     /**
@@ -52,7 +51,7 @@ class LoginController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $user = $this->userRepository->findByEmail($request->email);
+        $user = UserRepository::findByEmail($request->email);
         if (checkPassword($request->password, $user->password)) {
             return $this->responseSuccess(['api_token' => $user->api_token]);
         }

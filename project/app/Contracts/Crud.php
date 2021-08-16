@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Contracts;
 
-interface BaseInterface
+interface Crud
 {
     /**
      * Get all
