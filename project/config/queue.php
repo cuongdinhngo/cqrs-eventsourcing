@@ -93,6 +93,9 @@ return [
                 ],
                 'queue' => [
                     'job' => VladimirYuldashev\LaravelQueueRabbitMQ\Queue\Jobs\RabbitMQJob::class,
+                    // 'exchange' => 'user_events_direct',
+                    // 'exchange_type' => 'direct',
+                    // 'exchange_routing_key' => 'create_users',
                 ],
             ],
         ],

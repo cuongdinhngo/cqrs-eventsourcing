@@ -8,6 +8,7 @@ use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\UserUpdatedRequest;
 use App\CommandHandlers\Handlers\User\UserRegisterCommand;
 use App\CommandHandlers\Handlers\User\UserUpdateCommand;
+use App\CommandHandlers\Handlers\User\CreateBatchUsersCommand;
 use App\Jobs\CreateBatchUsersJob;
 use App\Contracts\User as UserContract;
 use App\Jobs\ProcessUserJobs;
@@ -93,10 +94,23 @@ class UserController extends Controller
         return $this->responseError("Can not update user", 500);
     }
 
+    /**
+     * Create many users
+     *
+     * @param Request $request
+     * @return json
+     */
     public function createUsers(Request $request)
     {
-        logger(__METHOD__);
-        CreateBatchUsersJob::dispatch($request['batch']);
-        logger('===> FINISHED CREATE USERS');
+        try {
+            $data = $request->batch;
+            $result = CommandFactory::handle(CreateBatchUsersCommand::class, $data);
+            if ($result) {
+                return $this->responseSuccess(['message' => 'Successfully Created a batch of users']);
+            }
+        } catch (\Exception $e) {
+            report($e);
+        }
+        return $this->responseError("Can not create a batch of users", 500);
     }
 }
