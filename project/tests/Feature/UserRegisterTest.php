@@ -9,6 +9,12 @@ class UserRegisterTest extends TestCase
 {
     protected $table;
 
+    public $request = [
+        "name" => "Mr Dummy Test",
+        "email" => "dummy_test@mailinator.com",
+        "password" => "123456",
+    ];
+
     public function setUp():void
     {
         parent::setUp();
@@ -39,12 +45,7 @@ class UserRegisterTest extends TestCase
      */
     public function testUserRegisterSuccessfully()
     {
-        $data = [
-            "name" => "Mr Dummy Test",
-            "email" => "dummy_test@mailinator.com",
-            "password" => "123456",
-        ];
-        $response = $this->jsonRequestUserRegister($data);
+        $response = $this->jsonRequestUserRegister($this->request);
 
         $response->assertStatus(200);
         $response->assertJson(['message' => 'Created Successfully']);

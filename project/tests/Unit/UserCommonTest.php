@@ -3,11 +3,17 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use App\CommandHandlers\User\UserCommon;
+use App\CommandHandlers\Handlers\User\UserCommon;
 use App\Models\User;
 
 class UserCommonTest extends TestCase
 {
+    public $request = [
+        "name" => "Mr Dummy Test",
+        "email" => "dummy_test@mailinator.com",
+        "password" => "123456",
+    ];
+
     public function setUp():void
     {
         parent::setUp();
@@ -33,16 +39,11 @@ class UserCommonTest extends TestCase
      */
     public function testPrepareData()
     {
-        $request = [
-            "name" => "Mr Dummy Test",
-            "email" => "dummy_test@mailinator.com",
-            "password" => "123456",
-        ];
         $userCommon = new UserCommon();
-        $preparedData = $userCommon->prepareData($request);
+        $preparedData = $userCommon->prepareData($this->request);
         $this->assertCount(4, $preparedData);
         $this->assertArrayHasKey('api_token', $preparedData);
-        $this->assertNotEquals($preparedData['password'], $request['password']);
+        $this->assertNotEquals($preparedData['password'], $this->request['password']);
         $this->assertNotNull($preparedData['password']);
     }
 
@@ -53,16 +54,11 @@ class UserCommonTest extends TestCase
      */
     public function testPrepareUpdateDataWithPassword()
     {
-        $request = [
-            "name" => "Mr Dummy Test",
-            "email" => "dummy_test@mailinator.com",
-            "password" => "123456",
-        ];
         $userCommon = new UserCommon();
-        $preparedData = $userCommon->prepareUpdateData($request);
+        $preparedData = $userCommon->prepareUpdateData($this->request);
         $this->assertCount(3, $preparedData);
         $this->assertArrayNotHasKey('api_token', $preparedData);
-        $this->assertNotEquals($preparedData['password'], $request['password']);
+        $this->assertNotEquals($preparedData['password'], $this->request['password']);
     }
 
     /**

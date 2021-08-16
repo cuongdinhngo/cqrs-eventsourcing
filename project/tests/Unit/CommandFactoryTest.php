@@ -3,8 +3,8 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use App\CommandHandlers\CommandFactory;
-use App\CommandHandlers\User\UserRegisterCommand;
+use App\Facades\CommandFactory;
+use App\CommandHandlers\Handlers\User\UserRegisterCommand;
 use Illuminate\Support\Facades\Event;
 use App\Models\User;
 
@@ -45,7 +45,7 @@ class CommandFactoryTest extends TestCase
     {
         Event::fake();
 
-        $result = app(CommandFactory::class)->handle(UserRegisterCommand::class, $this->data);
+        $result = CommandFactory::handle(UserRegisterCommand::class, $this->data);
         
         $this->assertTrue($result);
     }

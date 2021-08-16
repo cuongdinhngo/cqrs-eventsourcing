@@ -3,12 +3,12 @@
 namespace Tests\Unit;
 
 use Tests\TestCase;
-use App\CommandHandlers\User\UserRegisterCommand;
-use App\CommandHandlers\User\UserCommon;
+use App\CommandHandlers\Handlers\User\UserRegisterCommand;
+use App\CommandHandlers\Handlers\User\UserCommon;
 use App\Models\User;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
-use App\Repositories\User\UserRepository;
+use App\Repositories\UserRepository;
 
 class UserRegisterCommandTest extends TestCase
 {
@@ -21,18 +21,19 @@ class UserRegisterCommandTest extends TestCase
         "name" => "Mr Dummy Test",
     ];
 
+    public $request = [
+        "name" => "Mr Dummy Test",
+        "email" => "dummy_test@mailinator.com",
+        "password" => "123456",
+    ];
+
     protected $table;
 
     public function setUp():void
     {
-        $data = [
-            "name" => "Mr Dummy Test",
-            "email" => "dummy_test@mailinator.com",
-            "password" => "123456",
-        ];
         parent::setUp();
         $this->userRegisterCommand = app(UserRegisterCommand::class);
-        $this->data = app(UserCommon::class)->prepareData($data);
+        $this->data = app(UserCommon::class)->prepareData($this->request);
         $this->table = (new User())->getTable();
         $this->truncateTable($this->table);
     }
@@ -46,16 +47,6 @@ class UserRegisterCommandTest extends TestCase
     {
         $this->truncateManyTables();
         parent::tearDown();
-    }
-
-    /**
-     * test Injected User Repository
-     *
-     * @return void
-     */
-    public function testInjectUserRepository()
-    {
-        $this->assertTrue($this->userRegisterCommand->userRepository instanceof UserRepository);
     }
 
     /**
