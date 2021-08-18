@@ -36,7 +36,7 @@ class CreateUsers implements ShouldQueue
      */
     public function handle(BatchUsersRegister $event)
     {
-        logger('===> Start ....');
+        logger("===> Start ___ {$this->queue}");
         logger(serialize($event));
         UserRepository::insert($event->data);
         logger('===> Finished ...');

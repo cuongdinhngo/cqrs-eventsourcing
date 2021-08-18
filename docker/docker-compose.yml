@@ -38,12 +38,12 @@ services:
     ports:
         - "6379:6379"
   #RabbitMQ
-  project_rabbit:
-    container_name: project_rabbit
-    image: rabbitmq
-    ports:
-        - "5672:5672"
-        - "15672:15672"
+  # project_rabbit:
+  #   container_name: project_rabbit
+  #   image: rabbitmq
+  #   ports:
+  #       - "5672:5672"
+  #       - "15672:15672"
   #RabbitMQ_Management (username/passwd: guest/guest)
   rabbit_admin:
     image: rabbitmq:management

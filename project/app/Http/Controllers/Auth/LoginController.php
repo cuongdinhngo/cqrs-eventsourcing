@@ -52,7 +52,8 @@ class LoginController extends Controller
     public function login(LoginRequest $request)
     {
         $user = UserRepository::findByEmail($request->email);
-        if (checkPassword($request->password, $user->password)) {
+
+        if ($user && checkPassword($request->password, $user->password)) {
             return $this->responseSuccess(['api_token' => $user->api_token]);
         }
         return $this->responseError('Login Failed', 401);

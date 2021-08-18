@@ -23,6 +23,7 @@ class BatchUsersRegister
      */
     public function __construct(array $data)
     {
+        logger(__METHOD__);
         $this->data = $data;
     }
 

@@ -58,6 +58,9 @@ RUN apt-get -yqq update; apt-get -yqq install nginx
 ADD default.conf /etc/nginx/conf.d/default.conf
 ADD nginx.conf /etc/nginx/nginx.conf
 
+# Laravel Worker supervisor
+ADD laravel-worker.conf /etc/supervisor/conf.d/laravel-worker.conf
+
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
