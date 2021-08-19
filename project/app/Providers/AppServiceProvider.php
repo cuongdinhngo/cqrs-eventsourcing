@@ -7,6 +7,7 @@ use App\Contracts\User as UserContract;
 use App\Repositories\UserRepository;
 use App\CommandHandlers\Commands\CommandFactory;
 use App\Support\Common;
+use App\RabbitMQExtensions\RabbitMQConnectorExtension;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,6 +36,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        /** @var QueueManager $queue */
+        $queue = $this->app['queue'];
+
+        $queue->extend('rabbitmq', function () {
+            return new RabbitMQConnectorExtension($this->app['events']);
+        });
     }
 }
