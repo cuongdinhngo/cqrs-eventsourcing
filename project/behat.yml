@@ -1,9 +1,14 @@
 default:
     suites:
         default:
+            paths:    [ '%paths.base%/features/script_tests/welcome.feature' ]
+            bootstrap: [ '%paths.base%/features/bootstrap/' ]
+            # contexts: [ WelcomeContext ]
             contexts:
                 - WelcomeContext
         phase1:
+            paths:    [ '%paths.base%/features/script_tests/login.feature' ]
+            bootstrap: [ '%paths.base%/features/bootstrap/' ]
             contexts:
                 - LoginContext:
                     table: users
