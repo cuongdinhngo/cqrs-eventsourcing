@@ -7,7 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\LoginRequest;
 use App\Facades\UserRepository;
-use CommonUsage;
+use Cuongnd88\LaraAssistant\Facades\CommonUsage;
 
 class LoginController extends Controller
 {

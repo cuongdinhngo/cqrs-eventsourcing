@@ -1,4 +1,17 @@
 default:
+    extensions:
+        DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~
+        Behat\MinkExtension:
+            base_url: http://localhost:8000/
+            sessions:
+                chrome:
+                    chrome:
+                        api_url: http://localhost:9222
+                        download_behavior: allow
+                        download_path: /download
+                        validate_certificate: false
+        Laracasts\Behat:
+            env_path: .env.behat
     suites:
         default:
             paths:    [ '%paths.base%/features/script_tests/welcome.feature' ]
@@ -11,4 +24,10 @@ default:
             bootstrap: [ '%paths.base%/features/bootstrap/' ]
             contexts:
                 - LoginContext:
+                    table: users
+        phase2:
+            paths:    [ '%paths.base%/features/script_tests/authentication.feature' ]
+            bootstrap: [ '%paths.base%/features/bootstrap/' ]
+            contexts:
+                - LoginMinkContext:
                     table: users
