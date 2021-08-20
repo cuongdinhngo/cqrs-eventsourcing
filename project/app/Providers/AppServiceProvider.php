@@ -23,10 +23,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind("commandFactory", function(){
             return new CommandFactory();
         });
-
-        $this->app->bind("common", function(){
-            return new Common();
-        });
     }
 
     /**

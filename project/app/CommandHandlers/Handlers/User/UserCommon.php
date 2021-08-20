@@ -2,7 +2,7 @@
 
 namespace App\CommandHandlers\Handlers\User;
 
-use Common;
+use Cuongnd88\LaraAssistant\Facades\CommonUsage;
 
 class UserCommon
 {
@@ -15,7 +15,7 @@ class UserCommon
      */
     public function prepareData(array $request)
     {
-        $request['password'] = Common::hashPassword($request['password']) ?? null;
+        $request['password'] = CommonUsage::hashPassword($request['password']) ?? null;
         $request['api_token'] = generateApiToken();
         return $request;
     }
@@ -30,7 +30,7 @@ class UserCommon
     public function prepareUpdateData(array $request)
     {
         if (isset($request['password'])) {
-            $request['password'] = Common::hashPassword($request['password']);
+            $request['password'] = CommonUsage::hashPassword($request['password']);
         }
         return $request;
     }

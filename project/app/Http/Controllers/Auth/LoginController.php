@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\LoginRequest;
 use App\Facades\UserRepository;
+use CommonUsage;
 
 class LoginController extends Controller
 {
@@ -53,7 +54,7 @@ class LoginController extends Controller
     {
         $user = UserRepository::findByEmail($request->email);
 
-        if ($user && checkPassword($request->password, $user->password)) {
+        if ($user && CommonUsage::checkHashedPassword($request->password, $user->password)) {
             return $this->responseSuccess(['api_token' => $user->api_token]);
         }
         return $this->responseError('Login Failed', 401);

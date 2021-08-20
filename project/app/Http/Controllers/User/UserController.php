@@ -15,6 +15,7 @@ use App\Jobs\ProcessUserJobs;
 use App\Models\User;
 use App\Facades\CommandFactory;
 use App\Facades\UserRepository;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {

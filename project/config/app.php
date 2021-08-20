@@ -227,7 +227,6 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'CommandFactory' => App\Facades\CommandFactory::class,
-        'Common' => App\Facades\Common::class,
         'UserRepository' => App\Facades\UserRepository::class,
     ],
 
