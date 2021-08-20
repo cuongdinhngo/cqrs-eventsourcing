@@ -18,8 +18,12 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^2.4",
         "php-amqplib/php-amqplib": "^2.11",
-        "vladimir-yuldashev/laravel-queue-rabbitmq": "^10.0"
+        "vladimir-yuldashev/laravel-queue-rabbitmq": "^10.0",
+        "cuongnd88/lara-assistant": "^1.0.0"
     },
+    "repositories": [
+        { "type": "vcs", "url": "https://github.com/cuongnd88/lara-assistant" }
+    ],
     "require-dev": {
         "behat/behat": "^3.8",
         "facade/ignition": "^2.0",
@@ -48,9 +52,6 @@
         "classmap": [
             "database/seeds",
             "database/factories"
-        ],
-        "files": [
-            "app/Support/helpers.php"
         ]
     },
     "autoload-dev": {
