@@ -4,8 +4,7 @@ namespace App\CommandHandlers\Handlers\User;
 
 use Illuminate\Auth\Events\Registered;
 use App\Contracts\Command;
-use App\Facades\UserRepository;
-use App\Facades\Common;
+use Cuongnd88\LaraAssistant\Facades\CommonUsage;
 use App\Events\BatchUsersRegister;
 
 class CreateBatchUsersCommand implements Command
@@ -20,7 +19,7 @@ class CreateBatchUsersCommand implements Command
     public function execute(array $request)
     {
         $data = array_map(function($item){
-            $item['password'] = Common::hashPassword($item['password']);
+            $item['password'] = CommonUsage::hashPassword($item['password']);
             $item['api_token'] = generateApiToken();
             return $item;
         }, $request);
